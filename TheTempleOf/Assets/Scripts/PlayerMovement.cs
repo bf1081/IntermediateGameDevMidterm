@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	Vector3 inputVector;
 	Rigidbody myRigidbody;
-	public float speed;
+	public static float speed;
 	public float turnspeed;
 
 	// Use this for initialization
