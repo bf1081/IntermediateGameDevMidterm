@@ -16,24 +16,47 @@ public class OtherPlayerMovement : MonoBehaviour {
 	public AudioClip goldget;
 	public AudioClip circleget;
 	public AudioSource audiosource;
+	public AudioClip scrollget;
+	public AudioClip woodenget;
+	//public bool MarathonA = false;
+	//public bool MarathonB = false;
 
 	// Use this for initialization
 	void Start () {
 		rbody = GetComponent<Rigidbody> ();
 		audiosource = GetComponent<AudioSource> ();
+		if (PickAPerk.Perk1 == 1) {
+			speed = speed + .5F;
+		}
+		if (PickAPerk2.Perk2 == 1) {
+			speed = speed + .5F;
+		}
 
 	}
 
 	// Update is called once per frame
 	void Update () {
 
-		if (progress_bar_Cyris_BIIIITHC.Fill_Amount_Cyrus >= 0.99 && BasicLootCrates.isIn == true) {
+
+
+
+
+		if (progress_bar_Cyris_BIIIITHC.Fill_Amount_Cyrus >= 0.99 && BasicLootCrates.isIn == true  && BasicLootCrates.isWooden == false) {
 			audiosource.PlayOneShot (goldget, 0.7F);
 			//progress_bar_Cyris_BIIIITHC.Fill_Amount_Cyrus = 0;
 		}
-		if (progress_bar_Cyris_BIIIITHC.Fill_Amount_Cyrus >= 0.99 && Shop.Ptah == true && BasicLootCrates.isIn == true) {
+		if (progress_bar_Cyris_BIIIITHC.Fill_Amount_Cyrus >= 0.99 && Shop.Ptah == true && BasicLootCrates.isIn == true && BasicLootCrates.isWooden == false) {
 			audiosource.PlayOneShot (goldget, 0.7F);
 		//	progress_bar_Cyris_BIIIITHC.Fill_Amount_Cyrus = 0;
+		}
+
+		if (progress_bar_Cyris_BIIIITHC.Fill_Amount_Cyrus >= 0.99 && BasicLootCrates.isIn == true  && BasicLootCrates.isWooden == true) {
+			audiosource.PlayOneShot (woodenget, 0.7F);
+			//progress_bar_Cyris_BIIIITHC.Fill_Amount_Cyrus = 0;
+		}
+		if (progress_bar_Cyris_BIIIITHC.Fill_Amount_Cyrus >= 0.99 && Shop.Ptah == true && BasicLootCrates.isIn == true && BasicLootCrates.isWooden == true) {
+			audiosource.PlayOneShot (woodenget, 0.7F);
+			//	progress_bar_Cyris_BIIIITHC.Fill_Amount_Cyrus = 0;
 		}
 
 		float horizontal = Input.GetAxis ("Horizontal");
@@ -68,6 +91,12 @@ public class OtherPlayerMovement : MonoBehaviour {
 		}
 		if (col.gameObject.tag == "Treasure" && Shop.Ptah == true) {
 			audiosource.PlayOneShot (circleget, 0.7F);
+		}
+		if (col.gameObject.tag == "Scroll") {
+			audiosource.PlayOneShot (scrollget, 0.7F);
+		}
+		if (col.gameObject.tag == "Scroll" && Shop.Ptah == true) {
+			audiosource.PlayOneShot (scrollget, 0.7F);
 		}
 
 	}

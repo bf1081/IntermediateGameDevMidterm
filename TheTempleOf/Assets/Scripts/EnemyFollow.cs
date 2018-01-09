@@ -11,6 +11,7 @@ public class EnemyFollow : MonoBehaviour {
 	public Image Armor2;
 	public Image Armor3;
 	public static float speed = 2;
+	public static float diffspeed = 2;
 	public Rigidbody PlayerBody;
 	public GameObject NightHunter;
 	// Use this for initialization
@@ -23,11 +24,36 @@ public class EnemyFollow : MonoBehaviour {
 		Armor3 = GameObject.Find ("Armor 3").GetComponent<Image> ();
 		PlayerBody = GameObject.Find ("Player").GetComponent<Rigidbody> ();
 		NightHunter = GameObject.Find ("NightHunter");
+		if (PickAPerk.Perk1 == 6) {
+			speed = diffspeed - .2f;
+
+		}
+
+		if (PickAPerk2.Perk2 == 6) {
+			speed = diffspeed - .2f;
+
+		}
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+
+
+		if (Armor.isInRange == false) {
+		speed = diffspeed;
+		}
+
+		if (PickAPerk.Perk1 == 6 && Armor.isInRange == false) {
+			speed = diffspeed - .2f;
+
+		}
+
+		if (PickAPerk2.Perk2 == 6 && Armor.isInRange == false) {
+			speed = diffspeed - .2f;
+
+		}
 
 		target = GameObject.Find ("Player").transform;
 		transform.LookAt (target);
@@ -57,10 +83,7 @@ public class EnemyFollow : MonoBehaviour {
 
 		}
 
-		if (PlayerStats.CurseAmount >= 100) {
-			GameOver.alpha = 1;
-			Destroy (Player);
-		}
+
 
 		if (col.gameObject.tag == "Player" && Shop.lives == 1) {
 			//GameOver.alpha = 1;

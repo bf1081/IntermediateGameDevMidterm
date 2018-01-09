@@ -8,9 +8,18 @@ public class Treasure : MonoBehaviour {
 	public Text Cash;
 	public AudioClip impact;
 	public AudioSource audiosource;
+	public int maxGold = 100;
 
 	// Use this for initialization
 	void Start () {
+
+		if (PickAPerk.Perk1 == 7) {
+			maxGold = maxGold + 25;
+		}
+
+		if (PickAPerk2.Perk2 == 7) {
+			maxGold = maxGold + 25;
+		}
 		Player = GameObject.Find ("Player");
 		Cash = GameObject.Find ("GoldAquired").GetComponent<Text>();
 		audiosource = GetComponent<AudioSource> ();
@@ -22,9 +31,11 @@ public class Treasure : MonoBehaviour {
 
 	}
 
+
+
 	void OnCollisionEnter(Collision col) {
 		if (col.gameObject.tag == "Player" && Shop.Ptah == false) {
-			PlayerStats.GoldToBeGained = PlayerStats.GoldToBeGained + Random.Range (1, 100);
+			PlayerStats.GoldToBeGained = PlayerStats.GoldToBeGained + Random.Range (1, maxGold);
 			//MakeNewRoom.Gold = MakeNewRoom.Gold + Random.Range (1, 100);
 			audiosource.Play();
 			Destroy (this.gameObject);
@@ -33,7 +44,7 @@ public class Treasure : MonoBehaviour {
 		}
 
 		if (col.gameObject.tag == "Player" && Shop.Ptah == true) {
-			PlayerStats.GoldToBeGained = PlayerStats.GoldToBeGained + Random.Range (100, 250);
+			PlayerStats.GoldToBeGained = PlayerStats.GoldToBeGained + Random.Range (100, maxGold + 150);
 			//MakeNewRoom.Gold = MakeNewRoom.Gold + Random.Range (1, 100);
 			audiosource.Play();
 			Destroy (this.gameObject);
